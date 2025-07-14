@@ -60,6 +60,7 @@ export function HomePage(): React.JSX.Element {
                     src={product.imgUrl}
                     alt={product.name}
                     className="h-72 w-full rounded-xl object-cover"
+                    loading="lazy"
                   />
                 </div>
               ))}

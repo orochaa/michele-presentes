@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-lato: Lato, sans-serif;
+  --font-poppins: Poppins, sans-serif;
+  --font-raleway: Raleway, sans-serif;
+  --font-roboto: Roboto, sans-serif;
+  --font-quicksand: Quicksand, sans-serif;
+
+  --color-gold: #d4af37;
+  --color-lightGold: #f6c553;
+  --color-cream: #fdf4e3;
+  --color-beige: #ebddc6;
+  --color-brown: #6b4f1d;
+  --color-blush: #f7e6d7;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-cream);
+  font-family: Roboto, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}

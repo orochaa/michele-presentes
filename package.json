@@ -1,0 +1,45 @@
+{
+  "name": "cantinho-do-acai",
+  "private": true,
+  "type": "module",
+  "version": "2.0.2",
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "lint": "run-s lint:tsc lint:eslint lint:prettier",
+    "lint:eslint": "eslint --fix \"src/**/*.ts{x,}\"",
+    "lint:prettier": "prettier --write .",
+    "lint:tsc": "tsc --noEmit",
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:ci": "vitest --run --coverage --silent"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.525.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.6.3",
+    "tailwind-merge": "^3.3.1",
+    "tailwind-variants": "^1.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.31.0",
+    "eslint-plugin-mist3rbru": "^0.6.7",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.4",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+}

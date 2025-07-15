@@ -1,7 +1,12 @@
+import { useCart } from '@/context/cart-provider'
 import { categoriesEntries } from '@/lib/data/categories'
 import { formatCurrency, scrollTo, slang, slangId } from '@/lib/format'
+import { ShoppingCart } from 'lucide-react'
+import { Link } from 'react-router'
 
 export function HomePage(): React.JSX.Element {
+  const { cart, addCartEvent } = useCart()
+
   return (
     <div className="min-h-svh">
       <header className="bg-brown shadow-lg">
@@ -19,7 +24,7 @@ export function HomePage(): React.JSX.Element {
                 key={categoryName}
                 type="button"
                 onClick={scrollTo(slangId(categoryName), { offset: 20 })}
-                className="rounded-md px-3 text-sm font-medium text-white hover:text-zinc-200"
+                className="px-3 text-sm font-medium text-white hover:text-zinc-200"
               >
                 {categoryName}
               </button>
@@ -50,23 +55,44 @@ export function HomePage(): React.JSX.Element {
               </h3>
               <p className="text-zinc-600">{category.description}</p>
             </div>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-4">
               {category.products.map(product => (
-                <div
+                <button
                   key={product.name}
+                  type="button"
                   className="border-gold rounded-2xl border-2 p-1 shadow-lg transition-transform duration-300 hover:-translate-y-2"
+                  onClick={() =>
+                    addCartEvent({
+                      type: 'ADD',
+                      item: {
+                        product,
+                        price: category.price,
+                      },
+                    })
+                  }
                 >
                   <img
                     src={product.imgUrl}
                     alt={product.name}
-                    className="h-72 w-full rounded-xl object-cover"
+                    className="w-full rounded-xl object-cover"
                     loading="lazy"
                   />
-                </div>
+                </button>
               ))}
             </div>
           </section>
         ))}
+
+        {cart.length > 0 && location.pathname !== '/cart' && (
+          <Link
+            to="/cart"
+            className="bg-gold sticky bottom-4 ml-auto flex w-fit gap-2 rounded-sm p-2 text-white shadow-md"
+            title="Ir para página do carrinho"
+          >
+            <ShoppingCart className="size-5 shrink-0" />
+            Carrinho
+          </Link>
+        )}
       </main>
 
       <footer className="bg-brown py-6">

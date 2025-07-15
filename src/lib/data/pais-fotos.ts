@@ -1,5 +1,5 @@
 export const paisfotos: Category = {
-  description: 'Canecas com personalizadas com suas fotos.',
+  description: 'Canecas personalizadas com suas fotos.',
   price: 40,
   products: [
     {

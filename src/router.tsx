@@ -1,5 +1,6 @@
+import { CartPage } from '@/pages/cart'
 import { HomePage } from '@/pages/home'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import { ScrollToTop } from './scrool-to-top'
 
 export function Router(): React.JSX.Element {
@@ -7,7 +8,9 @@ export function Router(): React.JSX.Element {
     <BrowserRouter>
       <ScrollToTop>
         <Routes>
-          <Route path="*" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ScrollToTop>
     </BrowserRouter>

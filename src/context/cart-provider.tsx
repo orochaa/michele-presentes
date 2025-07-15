@@ -5,23 +5,20 @@ interface CartItem {
   product: Product
   price: number
   count: number
-  observation?: string
   total: number
 }
 
 type CartEvent =
   | {
       type: 'ADD'
-      item: Omit<CartItem, 'total'>
+      item: {
+        product: Product
+        price: number
+      }
     }
   | {
       type: 'REMOVE'
       index: number
-    }
-  | {
-      type: 'UPDATE-QUANTITY'
-      index: number
-      count: number
     }
 
 interface ICartContext {
@@ -38,22 +35,50 @@ function cartReducer(state: CartItem[], event: CartEvent): CartItem[] {
   switch (event.type) {
     case 'ADD': {
       const { item } = event
-      const total = item.price * item.count
 
-      return [...state, { ...item, total }]
+      const existingItemIndex = state.findIndex(
+        cartItem => cartItem.product.name === item.product.name
+      )
+
+      if (existingItemIndex !== -1) {
+        const updatedCart = [...state]
+        const existingItem = updatedCart[existingItemIndex]
+        const newCount = existingItem.count + 1
+        const newTotal = existingItem.price * newCount
+        updatedCart[existingItemIndex] = {
+          ...existingItem,
+          count: newCount,
+          total: newTotal,
+        }
+
+        return updatedCart
+      }
+
+      return [...state, { ...item, count: 1, total: item.price }]
     }
-    case 'REMOVE':
-      return state.filter((_, i) => i !== event.index)
 
-    case 'UPDATE-QUANTITY': {
-      const { index, count } = event
+    case 'REMOVE': {
+      const { index } = event
+      const itemToRemove = state[index]
       const updatedCart = [...state]
-      const item = updatedCart[index]
-      const total = item.price * count
-      updatedCart[index] = { ...item, count, total }
+
+      if (itemToRemove.count === 1) {
+        updatedCart.splice(index, 1)
+
+        return updatedCart
+      }
+
+      const newCount = itemToRemove.count - 1
+      const newTotal = itemToRemove.price * newCount
+      updatedCart[index] = {
+        ...itemToRemove,
+        count: newCount,
+        total: newTotal,
+      }
 
       return updatedCart
     }
+
     default:
       return state
   }

@@ -6,7 +6,7 @@ const buttonStyles = tv({
   base: 'flex items-center justify-center gap-2 rounded-sm border p-2',
   variants: {
     variant: {
-      confirm: 'border-red-300 bg-red-500 text-white disabled:bg-red-500/80',
+      confirm: 'bg-gold border-gold text-white disabled:bg-red-500/80',
       cancel: 'border-white bg-zinc-100',
     },
   },

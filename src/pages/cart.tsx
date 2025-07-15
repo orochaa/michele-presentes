@@ -31,6 +31,7 @@ export function CartPage(): React.JSX.Element {
       total += item.total
       msg += [
         `*${item.count} - ${item.product.name}*`,
+        `Imagem: ${encodeURI(location.origin + item.product.imgUrl)} `,
         `Preço unitário: ${formatCurrency(item.price)}`,
         `Total: ${formatCurrency(item.total)}\n\n`,
       ].join('\n')

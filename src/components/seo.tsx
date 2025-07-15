@@ -11,16 +11,24 @@ export function Seo({
   description,
   imageUrl,
 }: SeoProps): React.JSX.Element {
+  const absoluteImageUrl = imageUrl
+    ? `${globalThis.location.origin}${imageUrl}`
+    : undefined
+
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      {!!imageUrl && <meta property="og:image" content={imageUrl} />}
+      {!!absoluteImageUrl && (
+        <meta property="og:image" content={absoluteImageUrl} />
+      )}
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {!!imageUrl && <meta name="twitter:image" content={imageUrl} />}
+      {!!absoluteImageUrl && (
+        <meta name="twitter:image" content={absoluteImageUrl} />
+      )}
     </Helmet>
   )
 }

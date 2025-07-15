@@ -7,97 +7,97 @@ export const paisPersonagens: Category = {
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 1 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 1',
+      name: 'Caneca Kratos e Atreus',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 17 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 17',
+      name: 'Caneca Pateta e filho',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 2 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 2',
+      name: 'Caneca Homer e Liza',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 3 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 3',
+      name: 'Caneca Homer e Bart',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 4 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 4',
+      name: 'Caneca Sr. Incrível e Violeta',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 5 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 5',
+      name: 'Caneca Sr. Incrível e Flecha',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 6 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 6',
+      name: 'Caneca Rei leão e filha',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 7 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 7',
+      name: 'Caneca Rei leão e Simba',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 8 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 8',
+      name: 'Caneca Papai Smurf e Smurfet',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 9 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 9',
+      name: 'Caneca Papai Smurf e Desastrado',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 10 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 10',
+      name: 'Caneca Super Homem e filha',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 11 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 11',
+      name: 'Caneca Super Homem e filho',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 12 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 12',
+      name: 'Caneca Batman e filha',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 13 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 13',
+      name: 'Caneca Batman e filho',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 18 - Dia dos Pais (Personagens) 2025.jpg.jpg',
-      name: 'Caneca 18',
+      name: 'Caneca Pantera Negra e filha',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 19 - Dia dos Pais (Personagens) 2025.jpg.jpg',
-      name: 'Caneca 19',
+      name: 'Caneca Pantera Negra e filho',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 14 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 14',
+      name: 'Caneca Goku e filho',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 15 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 15',
+      name: 'Caneca Gru e filha',
     },
     {
       imgUrl:
         '/img/pais/personagens/Amostra Caneca 16 - Dia dos Pais (Personagens) 2025.jpg',
-      name: 'Caneca 16',
+      name: 'Caneca Shrek e filha',
     },
   ],
 }

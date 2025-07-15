@@ -81,7 +81,7 @@ export function CartPage(): React.JSX.Element {
                   className="h-32 rounded-sm object-cover shadow"
                 />
                 <div className="flex flex-col gap-2">
-                  <div className="flex flex-col">
+                  <div className="flex flex-col text-pretty">
                     <p className="text-lg font-semibold">
                       {count} - {product.name}
                     </p>

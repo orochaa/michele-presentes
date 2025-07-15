@@ -1,3 +1,4 @@
+import { Seo } from '@/components/seo'
 import { useAlert } from '@/context/alert-provider'
 import { useCart } from '@/context/cart-provider'
 import { categoriesEntries } from '@/lib/data/categories'
@@ -11,6 +12,10 @@ export function HomePage(): React.JSX.Element {
 
   return (
     <div className="min-h-svh">
+      <Seo
+        title="Michele Presentes - Canecas para o Dia dos Pais"
+        description="Surpreenda seu pai com canecas personalizadas e criativas. Temos uma variedade de modelos com fotos, personagens e muito mais para tornar o Dia dos Pais inesquecível."
+      />
       <header className="bg-brown sticky top-0 left-0 z-10 shadow-lg">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center">

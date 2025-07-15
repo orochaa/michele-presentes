@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
 import { Modal, useModal } from '@/components/modal'
+import { Seo } from '@/components/seo'
 import { useCart } from '@/context/cart-provider'
 import { formatCurrency } from '@/lib/format'
 import { ExternalLink, Minus, Plus, Trash2 } from 'lucide-react'
@@ -53,6 +54,10 @@ export function CartPage(): React.JSX.Element {
 
   return (
     <div className="min-h-svh">
+      <Seo
+        title="Michele Presentes - Carrinho de Compras"
+        description="Revise seu pedido de canecas personalizadas para o Dia dos Pais. Adicione, remova ou altere a quantidade de itens no seu carrinho de compras antes de finalizar a compra."
+      />
       <header className="bg-brown shadow-lg">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center">

@@ -136,12 +136,18 @@ function ModalCloseButton(props: ModalCloseButtonProps): ReactNode {
 }
 
 interface ModalTitleProps {
+  className?: string
   children: ReactNode
 }
 
 function ModalTitle(props: ModalTitleProps): ReactNode {
   return (
-    <h2 className="border-b border-zinc-600 p-4 text-xl font-bold text-zinc-800">
+    <h2
+      className={cn(
+        'border-b border-zinc-600 p-4 text-xl font-bold text-zinc-800',
+        props.className
+      )}
+    >
       {props.children}
     </h2>
   )

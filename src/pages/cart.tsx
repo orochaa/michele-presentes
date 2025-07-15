@@ -149,11 +149,11 @@ export function CartPage(): React.JSX.Element {
       </main>
 
       <Modal.Root ref={whatsAppModal}>
-        <Modal.Content className="flex max-w-lg items-start">
+        <Modal.Content className="flex items-start sm:max-w-lg">
           <Modal.Title>ATENÇÃO</Modal.Title>
           <Modal.CloseButton />
           <div className="px-6 py-4">
-            <p>
+            <p className="text-pretty">
               Ao clicar no botão <b>&quot;Continuar&quot;</b>, você será
               redirecionado para o WhatsApp do Cantinho do Açaí, com uma
               mensagem pré-escrita contendo todos os detalhes do seu pedido.

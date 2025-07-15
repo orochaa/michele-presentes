@@ -1,4 +1,5 @@
 import { clsx } from 'clsx'
+import { Info } from 'lucide-react'
 import {
   createContext,
   useCallback,
@@ -8,13 +9,11 @@ import {
 } from 'react'
 import type { ReactNode } from 'react'
 
-interface IAlertContext {
-  popMessage: (message: string) => void
-}
+export interface IAlertContext
+  extends Record<Alert.Type, (message: string) => void> {}
 
-export const AlertContext = createContext<IAlertContext>({
-  popMessage() {},
-})
+// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+export const AlertContext = createContext<IAlertContext>({} as IAlertContext)
 
 type PartialExcept<T, K extends keyof T> = {
   [Key in Exclude<keyof T, K>]?: T[Key]
@@ -23,7 +22,7 @@ type PartialExcept<T, K extends keyof T> = {
 }
 
 const createAlert = (
-  data: PartialExcept<Alert.State, 'message'>
+  data: PartialExcept<Alert.State, 'message' | 'type'>
 ): Alert.State => ({
   id: data.message,
   counter: 1,
@@ -41,16 +40,23 @@ const formatAlertCounter = (alert: Alert.State, count: number): Alert.State => {
 
 const alertReducer: Alert.Reducer = (state, event) => {
   const addAlert = (addEvent: Alert.PickEvent<'ADD'>): Alert.State[] => {
-    const exists = state.find(alert => alert.id === addEvent.message)
+    const exists = state.find(alert => alert.id === addEvent.data.message)
     const result: Alert.State[] = exists
       ? state.map(alert => {
-          return alert.id === addEvent.message
+          return alert.id === addEvent.data.message
             ? formatAlertCounter({ ...alert, isVisible: true }, 1)
             : alert
         })
-      : [...state, createAlert({ message: addEvent.message })]
+      : [
+          ...state,
+          createAlert({
+            message: addEvent.data.message,
+            type: addEvent.data.type,
+          }),
+        ]
+    const alertsLimit = 5
 
-    return result.length > 5 ? result.slice(1) : result
+    return result.length > alertsLimit ? result.slice(1) : result
   }
 
   const hideAlert = (hideEvent: Alert.PickEvent<'HIDE'>): Alert.State[] => {
@@ -72,7 +78,7 @@ const alertReducer: Alert.Reducer = (state, event) => {
             : formatAlertCounter(alert, -1)
           : alert
       )
-      .filter(Boolean) as Alert.State[]
+      .filter(Boolean)
   }
 
   switch (event.type) {
@@ -94,22 +100,24 @@ interface AlertProviderProps {
 export function AlertProvider({
   children,
 }: AlertProviderProps): React.JSX.Element {
-  const [alerts, addAlertEvent] = useReducer(alertReducer, [
-    // { id: '1', counter: 1, isVisible: true, message: '123' } as Alert.State
-  ])
+  const [alerts, addAlertEvent] = useReducer(alertReducer, [])
 
-  const popMessage = useCallback((message: string): void => {
+  const alert = useCallback((type: Alert.Type, message: string): void => {
     if (message && typeof message === 'string') {
       addAlertEvent({
         type: 'ADD',
-        message,
+        data: {
+          type,
+          message,
+        },
       })
+      const removeDelay = 4500
       setTimeout(() => {
         addAlertEvent({
           type: 'REMOVE',
           id: message,
         })
-      }, 4500)
+      }, removeDelay)
     }
   }, [])
 
@@ -126,30 +134,34 @@ export function AlertProvider({
     }, 400)
   }, [])
 
-  const context = useMemo<IAlertContext>(() => ({ popMessage }), [popMessage])
+  const context = useMemo<IAlertContext>(
+    () => ({
+      error: (message: string): void => alert('error', message),
+      success: (message: string): void => alert('success', message),
+    }),
+    [alert]
+  )
 
   return (
     <AlertContext.Provider value={context}>
       {children}
 
-      <div
-        data-testid="alert-container"
-        className="fixed top-20 left-1/2 z-50 -translate-x-1/2"
-      >
+      <div className="fixed right-6 bottom-8 z-50 flex flex-col gap-2">
         {alerts.map(alert => (
           <button
-            key={alert.id}
             type="button"
-            data-testid="alert"
+            key={alert.id}
             className={clsx(
-              'flex items-center justify-center gap-2',
-              'rounded-md border-2 border-red-500 bg-zinc-100',
-              'max-w-sm min-w-[10rem] p-6 text-sm font-semibold text-black shadow-lg',
-              'transition duration-300 md:text-base lg:text-lg',
-              alert.isVisible ? 'block' : 'hidden'
+              'flex max-w-sm min-w-40 items-center justify-center gap-2 rounded-md border-l-4 bg-white p-6 text-sm font-semibold text-black shadow-lg transition duration-300 md:text-base lg:text-lg',
+              alert.isVisible ? 'block' : 'hidden',
+              {
+                'border-gold': alert.type === 'success',
+                'border-red-500': alert.type === 'error',
+              }
             )}
             onClick={() => clickAlert(alert)}
           >
+            <Info size={20} className="shrink-0" />
             {alert.message}
           </button>
         ))}
@@ -158,13 +170,12 @@ export function AlertProvider({
   )
 }
 
-export function useAlert(): IAlertContext {
-  return useContext(AlertContext)
-}
-
 export namespace Alert {
+  export type Type = 'success' | 'error'
+
   export interface State {
     id: string
+    type: Type
     message: string
     isVisible: boolean
     counter: number
@@ -173,7 +184,10 @@ export namespace Alert {
   export type Event =
     | {
         type: 'ADD'
-        message: string
+        data: {
+          type: Type
+          message: string
+        }
       }
     | {
         type: 'REMOVE'
@@ -184,11 +198,18 @@ export namespace Alert {
         id: string
       }
 
-  export type PickEvent<T extends Event['type'], K = Event> = K extends Event
-    ? K['type'] extends T
-      ? K
+  export type PickEvent<
+    TEventType extends Event['type'],
+    TEvent = Event,
+  > = TEvent extends Event
+    ? TEvent['type'] extends TEventType
+      ? TEvent
       : never
     : never
 
   export type Reducer = (state: State[], event: Event) => State[]
+}
+
+export function useAlert(): IAlertContext {
+  return useContext(AlertContext)
 }

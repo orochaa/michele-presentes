@@ -1,3 +1,4 @@
+import { useAlert } from '@/context/alert-provider'
 import { useCart } from '@/context/cart-provider'
 import { categoriesEntries } from '@/lib/data/categories'
 import { formatCurrency, scrollTo, slang, slangId } from '@/lib/format'
@@ -6,10 +7,11 @@ import { Link } from 'react-router'
 
 export function HomePage(): React.JSX.Element {
   const { cart, addCartEvent } = useCart()
+  const alert = useAlert()
 
   return (
     <div className="min-h-svh">
-      <header className="bg-brown shadow-lg">
+      <header className="bg-brown sticky top-0 left-0 z-10 shadow-lg">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center">
             <img
@@ -61,7 +63,7 @@ export function HomePage(): React.JSX.Element {
                   key={product.name}
                   type="button"
                   className="border-gold rounded-2xl border-2 p-1 shadow-lg transition-transform duration-300 hover:-translate-y-2"
-                  onClick={() =>
+                  onClick={() => {
                     addCartEvent({
                       type: 'ADD',
                       item: {
@@ -69,7 +71,8 @@ export function HomePage(): React.JSX.Element {
                         price: category.price,
                       },
                     })
-                  }
+                    alert.success(`Caneca adicionada ao carrinho!`)
+                  }}
                 >
                   <img
                     src={product.imgUrl}
